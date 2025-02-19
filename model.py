@@ -94,58 +94,6 @@ $$$api_doc$$$
 
 prompt = prompt.replace("$$$api_doc$$$", api_doc)
 
-# def sample_random_frame_base64(video_path):
-#     """
-#     从视频文件中随机采样一帧并返回base64格式
-    
-#     参数:
-#         video_path (str): 视频文件的路径
-    
-#     返回:
-#         base64_str: base64编码的图像字符串
-#         frame_number: 采样的帧号
-#     """
-#     try:
-#         # 打开视频文件
-#         cap = cv2.VideoCapture(video_path)
-        
-#         if not cap.isOpened():
-#             print("Error: 无法打开视频文件")
-#             return None, -1
-        
-#         # 获取视频总帧数
-#         total_frames = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
-        
-#         if total_frames <= 0:
-#             print("Error: 视频帧数为0")
-#             return None, -1
-        
-#         # 随机选择一个帧号
-#         random_frame = random.randint(0, total_frames - 1)
-        
-#         # 设置视频读取位置到随机帧
-#         cap.set(cv2.CAP_PROP_POS_FRAMES, random_frame)
-        
-#         # 读取该帧
-#         ret, frame = cap.read()
-        
-#         # 释放视频对象
-#         cap.release()
-        
-#         if ret:
-#             # 将帧编码为jpg格式
-#             _, buffer = cv2.imencode('.jpg', frame)
-#             # 直接将buffer转换为base64字符串
-#             base64_str = base64.b64encode(buffer).decode('utf-8')
-#             return base64_str, random_frame
-#         else:
-#             print("Error: 无法读取选中的帧")
-#             return None, -1
-            
-#     except Exception as e:
-#         print(f"Error: {str(e)}")
-#         return None, -1
-
 def the_big_brain(base64_str,
     current_following_instruction="起立", 
     current_gesture_info = """

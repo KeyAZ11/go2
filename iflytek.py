@@ -1,6 +1,7 @@
 import hashlib
 import hmac
 import base64
+import pyaudio
 import json
 import threading
 import wave
@@ -13,7 +14,7 @@ import websocket
 APP_ID = "c3f28266"
 API_KEY = "77e4a1df6809b95dde567758d7011a23"
 API_SECRET = "MTJlZTg2NDc0ODJlY2ExZDdlMjdlZDcy"
-AUDIO_FILE_PATH = "wav/C0001/IC0001W0031.wav"
+AUDIO_FILE_PATH = "record.wav"
 
 def generate_auth_url():
     #生成带鉴权参数的WebSocket连接URL
@@ -194,6 +195,43 @@ class SpeechRecognizer:
         print("启动识别服务...")
         self.ws.run_forever()
 
+def record_audio(output_filename, record_seconds):
+    CHUNK = 1024
+    FORMAT = pyaudio.paInt16
+    CHANNELS = 1
+    RATE = 16000
+
+    audio = pyaudio.PyAudio()
+
+    try:
+        stream = audio.open(format=FORMAT, channels=CHANNELS, rate=RATE, input=True, frames_per_buffer=CHUNK)
+    except Exception as e:
+        print(f"无法访问麦克风: {str(e)}")
+        return
+
+    print(f"开始录音 {record_seconds} 秒...")
+    frames = []
+
+    for _ in range(0, int(RATE / CHUNK * record_seconds)):
+        data = stream.read(CHUNK)
+        frames.append(data)
+
+    print("录音结束，保存文件...")
+
+    stream.stop_stream()
+    stream.close()
+    audio.terminate()
+
+    wf = wave.open(output_filename, 'wb')
+    wf.setnchannels(CHANNELS)
+    wf.setsampwidth(audio.get_sample_size(FORMAT))
+    wf.setframerate(RATE)
+    wf.writeframes(b''.join(frames))
+    wf.close()
+    print(f"音频文件已保存到 {output_filename}")
+
+
 if __name__ == "__main__":
+    record_audio(AUDIO_FILE_PATH, 5)
     recognizer = SpeechRecognizer()
     recognizer.start()
