@@ -1,16 +1,16 @@
 {
     "action_queue": [
         {
-            "api_name": "BalanceStand",
+            "api_name": "StandDown",
             "parameters": {},
-            "reason": "机器人需要解除锁定并准备进行移动",
-            "expected_outcome": "机器人进入平衡站立模式"
+            "reason": "用户指令要求机器人趴下。",
+            "expected_outcome": "机器人将安全地趴下并锁定关节。"
         }
     ],
     "safety_checks": {
         "environment_safe": true,
         "motion_feasible": true,
-        "risk_assessment": "环境安全，没有明显障碍物"
+        "risk_assessment": "当前环境安全，机器人可以安全地趴下。"
     },
     "execution_priority": "normal"
 }

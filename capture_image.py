@@ -11,7 +11,7 @@ def capture_image():
     client.SetTimeout(3.0)
     client.Init()
 
-    print("##################GetImageSample###################")
+    print("##################GetImage###################")
     code, data = client.GetImageSample()
 
     if code != 0:

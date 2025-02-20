@@ -153,7 +153,9 @@ def process_json_command(json_data):
                 api_methods[api_name](**call_params)
             else:
                 print(f"执行接口: {api_name} (无参数) (原因: {reason})")
+                sport_client.StandUp()
                 api_methods[api_name]()
+
             results.append({
                 "api_name": api_name,
                 "status": "executed",
@@ -173,16 +175,17 @@ def process_json_command(json_data):
 
 # 主逻辑：从文件或标准输入读取 JSON 数据，并执行动作队列
 if __name__ == '__main__':
-    model.main()
-    json_filename = "action.json"
-    try:
-        with open(json_filename, "r", encoding="utf-8") as f:
-            json_data = json.load(f)
-    except Exception as e:
-        print(f"读取文件 {json_filename} 失败: {str(e)}")
-        sys.exit(1)
+    while True:
+        model.main()
+        json_filename = "action.json"
+        try:
+            with open(json_filename, "r", encoding="utf-8") as f:
+                json_data = json.load(f)
+        except Exception as e:
+            print(f"读取文件 {json_filename} 失败: {str(e)}")
+            sys.exit(1)
 
-    results = process_json_command(json_data)
-    print("\n处理结果：")
-    print(json.dumps(results, indent=2, ensure_ascii=False))
-    time.sleep(0.5)
+        results = process_json_command(json_data)
+        print("\n处理结果：")
+        print(json.dumps(results, indent=2, ensure_ascii=False))
+        time.sleep(0.5)
