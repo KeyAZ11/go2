@@ -96,7 +96,7 @@ $$$api_doc$$$
 prompt = prompt.replace("$$$api_doc$$$", api_doc)
 
 def the_big_brain(base64_str,
-    current_following_instruction=iflytek.main(), 
+    current_following_instruction="起立", 
     current_gesture_info = """
     IMU Roll/Pitch/Yaw: (0.0058678435161709785, -0.10672464966773987, -0.02628220058977604)
     Front right hip angle: -0.34
@@ -299,10 +299,12 @@ def process_model_response(response_text, api_doc):
         return None
 
 def main():
+    instruction = iflytek.main()
     capture_image.capture_image()
+    print("思考中...")
     with open("img.jpg", "rb") as img_file:
         base64_str = base64.b64encode(img_file.read()).decode("utf-8")
-    api_output = the_big_brain(base64_str)
+    api_output = the_big_brain(base64_str, instruction)
     print(api_output)
 
     validated_response = process_model_response(api_output, api_doc)

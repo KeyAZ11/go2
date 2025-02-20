@@ -150,10 +150,25 @@ def process_json_command(json_data):
         try:
             if call_params:
                 print(f"执行接口: {api_name} 参数: {call_params} (原因: {reason})")
+                if api_name == "Move":
+                    print("StandUp")
+                    sport_client.StandUp()
+                    time.sleep(0.1)
+                    print("BalanceStand")
+                    sport_client.BalanceStand()
+                    time.sleep(0.1)
+
+                print("执行...")
                 api_methods[api_name](**call_params)
             else:
                 print(f"执行接口: {api_name} (无参数) (原因: {reason})")
-                sport_client.StandUp()
+                
+                if api_name == "BalanceStand":
+                    print("StandUp")
+                    sport_client.StandUp()
+                    time.sleep(0.1)
+
+                print("执行...")
                 api_methods[api_name]()
 
             results.append({
@@ -175,7 +190,7 @@ def process_json_command(json_data):
 
 # 主逻辑：从文件或标准输入读取 JSON 数据，并执行动作队列
 if __name__ == '__main__':
-    while True:
+    while True:   
         model.main()
         json_filename = "action.json"
         try:

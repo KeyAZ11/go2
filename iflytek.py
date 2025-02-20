@@ -232,7 +232,7 @@ def record_audio(output_filename, record_seconds):
 
 
 def main():
-    input("按回车键开始录音...")
+    input("按回车开始录音...")
     record_audio(AUDIO_FILE_PATH, 5)
     recognizer = SpeechRecognizer()
     recognizer.start()

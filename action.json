@@ -3,14 +3,14 @@
         {
             "api_name": "StandDown",
             "parameters": {},
-            "reason": "用户指令要求机器人趴下。",
-            "expected_outcome": "机器人将安全地趴下并锁定关节。"
+            "reason": "根据用户指令，机器人需要趴下。",
+            "expected_outcome": "机器人将安全地趴下，所有关节锁定。"
         }
     ],
     "safety_checks": {
         "environment_safe": true,
         "motion_feasible": true,
-        "risk_assessment": "当前环境安全，机器人可以安全地趴下。"
+        "risk_assessment": "当前环境无障碍物，趴下动作安全可行。"
     },
     "execution_priority": "normal"
 }
