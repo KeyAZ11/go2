@@ -1,28 +1,16 @@
 {
     "action_queue": [
         {
-            "api_name": "StandDown", 
+            "api_name": "BalanceStand",
             "parameters": {},
-            "reason": "机器人趴下",
-            "expected_outcome": "机器人趴下"
-        },
-        {
-            "api_name": "StandUp", 
-            "parameters": {},
-            "reason": "机器人从趴下状态恢复",
-            "expected_outcome": "机器人站立"
-        },
-        {
-            "api_name": "Move",
-            "parameters": {"vx": 1.0, "vy": 0.0, "vyaw": 0.5},
-            "reason": "机器人前进",
-            "expected_outcome": "机器人开始向前运动"
+            "reason": "机器人需要解除锁定并准备进行移动",
+            "expected_outcome": "机器人进入平衡站立模式"
         }
     ],
     "safety_checks": {
         "environment_safe": true,
         "motion_feasible": true,
-        "risk_assessment": "无潜在风险"
+        "risk_assessment": "环境安全，没有明显障碍物"
     },
     "execution_priority": "normal"
 }

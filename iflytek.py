@@ -231,7 +231,11 @@ def record_audio(output_filename, record_seconds):
     print(f"音频文件已保存到 {output_filename}")
 
 
-if __name__ == "__main__":
+def main():
     record_audio(AUDIO_FILE_PATH, 5)
     recognizer = SpeechRecognizer()
     recognizer.start()
+    return recognizer.final_text
+
+if __name__ == "__main__":
+    main()

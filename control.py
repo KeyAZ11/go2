@@ -3,8 +3,9 @@ import sys
 import time
 from unitree_sdk2py.core.channel import ChannelFactoryInitialize
 from unitree_sdk2py.go2.sport.sport_client import SportClient
+import model
 
-ChannelFactoryInitialize(0, "eth0")
+ChannelFactoryInitialize(0, "en7")
 sport_client = SportClient()
 sport_client.SetTimeout(10.0)
 sport_client.Init()
@@ -72,32 +73,6 @@ api_params = {
 }
 
 def process_json_command(json_data):
-    """
-    预期 JSON 格式：
-    {
-      "action_queue": [
-          {
-             "api_name": "StandUp", 
-             "parameters": {},
-             "reason": "机器人从趴下状态恢复",
-             "expected_outcome": "机器人站立"
-          },
-          {
-             "api_name": "Move",
-             "parameters": {"vx": 1.0, "vy": 0.0, "vyaw": 0.5},
-             "reason": "机器人前进",
-             "expected_outcome": "机器人开始向前运动"
-          }
-          ...
-      ],
-      "safety_checks": {
-          "environment_safe": true,
-          "motion_feasible": true,
-          "risk_assessment": "无潜在风险"
-      },
-      "execution_priority": "normal"
-    }
-    """
     # 检查是否包含必须字段
     required_keys = ["action_queue", "safety_checks", "execution_priority"]
     for key in required_keys:
@@ -198,6 +173,7 @@ def process_json_command(json_data):
 
 # 主逻辑：从文件或标准输入读取 JSON 数据，并执行动作队列
 if __name__ == '__main__':
+    model.main()
     json_filename = "action.json"
     try:
         with open(json_filename, "r", encoding="utf-8") as f:

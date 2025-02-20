@@ -7,8 +7,6 @@ from unitree_sdk2py.go2.video.video_client import VideoClient
 
 def capture_image():
 
-    ChannelFactoryInitialize(0, "en0")
-
     client = VideoClient()
     client.SetTimeout(3.0)
     client.Init()

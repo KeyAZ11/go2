@@ -5,6 +5,7 @@ import random
 import json
 import cv2
 import capture_image
+import iflytek
 
 df = pd.read_csv("接口表.csv")
 
@@ -95,7 +96,7 @@ $$$api_doc$$$
 prompt = prompt.replace("$$$api_doc$$$", api_doc)
 
 def the_big_brain(base64_str,
-    current_following_instruction="起立", 
+    current_following_instruction=iflytek.main(), 
     current_gesture_info = """
     IMU Roll/Pitch/Yaw: (0.0058678435161709785, -0.10672464966773987, -0.02628220058977604)
     Front right hip angle: -0.34
@@ -151,14 +152,6 @@ def the_big_brain(base64_str,
     )
 
     return response.choices[0].message.content
-
-# 使用示例
-capture_image.capture_image()
-# 读取图片并转换成 base64 编码字符串
-with open("img.jpg", "rb") as img_file:
-    base64_str = base64.b64encode(img_file.read()).decode("utf-8")
-api_output = the_big_brain(base64_str)
-print(api_output)
 
 def validate_model_output(response_json, api_doc):
     """
@@ -305,15 +298,31 @@ def process_model_response(response_text, api_doc):
         print(f"处理失败: {str(e)}")
         return None
 
-validated_response = process_model_response(api_output, api_doc)
+def main():
+    capture_image.capture_image()
+    with open("img.jpg", "rb") as img_file:
+        base64_str = base64.b64encode(img_file.read()).decode("utf-8")
+    api_output = the_big_brain(base64_str)
+    print(api_output)
 
-if validated_response:
-    # 处理验证通过的响应
-    action_queue = validated_response["action_queue"]
-    for action in action_queue:
-        # 执行动作
-        print(f"执行动作: {action['api_name']}")
-else:
-    # 处理验证失败的情况
-    print("响应验证失败，需要重新生成")
+    validated_response = process_model_response(api_output, api_doc)
+    if validated_response:
+        # 处理验证通过的响应
+        action_queue = validated_response["action_queue"]
+        for action in action_queue:
+            # 执行动作
+            print(f"执行动作: {action['api_name']}")
+    else:
+        # 处理验证失败的情况
+        print("响应验证失败，需要重新生成")
+
+    with open('action.json', 'w', encoding='utf-8') as f:
+        f.write(api_output)
+    with open('action.json', 'r', encoding='utf-8') as f:
+        lines = f.readlines()
+    lines = lines[1:-1]
+    with open('action.json', 'w', encoding='utf-8') as f:
+        f.writelines(lines)
     
+if __name__ == "__main__":
+    main()
