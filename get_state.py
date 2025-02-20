@@ -38,11 +38,6 @@ class RobotState:
 
 class RobotStateManager:
     def __init__(self, network_interface: str):
-        """Initialize robot state manager
-        
-        Args:
-            network_interface: Network interface name (e.g. 'enp2s0')
-        """
         # Initialize DDS communication
         ChannelFactoryInitialize(0, network_interface)
         
