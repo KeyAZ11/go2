@@ -1,0 +1,4 @@
+Method,Accuracy,Response Time,Resource Usage,Stability
+LoRA Fine-tuning,84%,0.8s,14-16GB,92%
+Full Fine-tuning,86%,1.5s,32GB,90%
+Rule-based,65%,0.3s,2GB,75%

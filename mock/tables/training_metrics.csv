@@ -1,0 +1,5 @@
+Metric,Initial Value,Final Value,Improvement Rate
+Accuracy,45%,84%,86.7%
+Response Time,2.5s,0.8s,68%
+Training Loss,2.3456,0.6543,72.1%
+Validation Loss,2.4567,0.7890,67.9%

@@ -1,0 +1,33 @@
+{
+    "model_config": {
+        "base_model": "openbmb/MiniCPM-V",
+        "lora_rank": 8,
+        "lora_alpha": 32,
+        "lora_dropout": 0.1,
+        "target_modules": ["query", "key", "value", "dense"],
+        "max_length": 512
+    },
+    "training_config": {
+        "epochs": 10,
+        "batch_size": 8,
+        "learning_rate": 1e-4,
+        "gradient_accumulation_steps": 2,
+        "warmup_steps": 100,
+        "optimizer": "AdamW",
+        "scheduler": "cosine_with_warmup"
+    },
+    "hardware_config": {
+        "gpu": "NVIDIA A100",
+        "memory": "16GB VRAM",
+        "precision": "bfloat16"
+    },
+    "dataset_config": {
+        "total_samples": 200,
+        "train_split": 0.8,
+        "val_split": 0.1,
+        "test_split": 0.1,
+        "image_resolution": [224, 224],
+        "frame_interval": 1,
+        "video_duration": "5-15 seconds per sample"
+    }
+} 

@@ -1,0 +1,7 @@
+Metric,Accuracy,Description
+Environment Safety Assessment,95%,Environment risk assessment accuracy
+Motion Feasibility Check,92%,Action execution feasibility check
+Risk Assessment,88%,Comprehensive risk assessment accuracy
+Command Clarification Rate,15%,Rate of commands requiring clarification
+Fallback Mechanism Success,92%,Success rate of fallback mechanism
+Emergency Stop Accuracy,98%,Accuracy of emergency stop handling

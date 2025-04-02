@@ -1,0 +1,5 @@
+Metric,LoRA,Full Fine-tuning,Improvement Rate
+VRAM Usage,14-16GB,32GB,50%
+Training Time,12h,48h,75%
+Inference Speed,1.8x,1x,80%
+Parameter Count,8.5M,85M,90%

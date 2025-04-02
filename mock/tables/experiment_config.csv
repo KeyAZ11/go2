@@ -1,0 +1,6 @@
+Component,Model/Version,Configuration Parameters
+GPU,NVIDIA A100,16GB VRAM
+Framework,PyTorch,2.0.1
+Model,MiniCPM-V,LoRA rank=8
+Dataset,Custom,200 samples
+Training Environment,CUDA 12.1,bfloat16 precision
